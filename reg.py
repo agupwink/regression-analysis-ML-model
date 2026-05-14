@@ -25,3 +25,17 @@ df['Snowfall'] = df['Snowfall'].fillna(0)
 df.dropna(inplace=True)
 
 print(f"Clean dataset: {len(df):,} rows, {len(FEATURES)} features -> target: {TARGET}\n")
+
+# ── 2. Correlation & Heatmap ─────────────────────────────────────────────────
+corr = df.corr()
+print("Correlation with MeanTemp:")
+print(corr[TARGET].sort_values(ascending=False).to_string())
+print()
+
+plt.figure(figsize=(10, 8))
+sns.heatmap(corr, annot=True, fmt='.2f', cmap='coolwarm', square=True)
+plt.title('Feature Correlation Heatmap')
+plt.tight_layout()
+plt.savefig('/Users/apple/reg-ana/correlation_heatmap.png', dpi=150)
+plt.close()
+print("Saved: correlation_heatmap.png")
