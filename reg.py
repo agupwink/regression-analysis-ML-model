@@ -90,6 +90,16 @@ models = {
     'Random Forest':     RandomForestRegressor(n_estimators=100, random_state=42, n_jobs=-1),
 }
 
+header = f"{'Model':<22} {'R2 Score':>10} {'MSE':>12} {'MAE':>10}"
+print(header)
+print('-' * len(header))
+
 for name, model in models.items():
     model.fit(X_train, y_train)
-    print(f"Trained: {name}")
+    preds = model.predict(X_test)
+    r2  = r2_score(y_test, preds)
+    mse = mean_squared_error(y_test, preds)
+    mae = mean_absolute_error(y_test, preds)
+    print(f"{name:<22} {r2:>10.4f} {mse:>12.4f} {mae:>10.4f}")
+
+print("\nDone. All plots saved to /Users/apple/reg-ana/")
