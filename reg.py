@@ -10,7 +10,7 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
 
-# ── 1. Load & Clean ──────────────────────────────────────────────────────────
+# 1. Load & Clean Data
 df = pd.read_csv('/Users/apple/Downloads/Summary of Weather.csv')
 
 df['Precip'] = df['Precip'].replace('T', 0)
@@ -26,7 +26,7 @@ df.dropna(inplace=True)
 
 print(f"Clean dataset: {len(df):,} rows, {len(FEATURES)} features -> target: {TARGET}\n")
 
-# ── 2. Correlation & Heatmap ─────────────────────────────────────────────────
+# 2. Correlation & Heatmap
 corr = df.corr()
 print("Correlation with MeanTemp:")
 print(corr[TARGET].sort_values(ascending=False).to_string())
@@ -40,7 +40,7 @@ plt.savefig('/Users/apple/reg-ana/correlation_heatmap.png', dpi=150)
 plt.close()
 print("Saved: correlation_heatmap.png")
 
-# ── 3. Visualisations ────────────────────────────────────────────────────────
+# 3. Visualisations
 # Histogram
 plt.figure(figsize=(8, 5))
 plt.hist(df[TARGET], bins=50, color='steelblue', edgecolor='white')
@@ -77,13 +77,13 @@ plt.savefig('/Users/apple/reg-ana/linechart.png', dpi=150)
 plt.close()
 print("Saved: linechart.png\n")
 
-# ── 4. Train / Test Split (80 / 20) ──────────────────────────────────────────
+# 4. Train / Test Split (80 / 20)
 X = df[FEATURES]
 y = df[TARGET]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 print(f"Train size: {len(X_train):,}  |  Test size: {len(X_test):,}\n")
 
-# ── 5. Build & Train Models ───────────────────────────────────────────────────
+# 5. Build & Train Models
 models = {
     'Linear Regression': LinearRegression(),
     'Decision Tree':     DecisionTreeRegressor(random_state=42),
