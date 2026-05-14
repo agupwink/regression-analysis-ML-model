@@ -76,3 +76,20 @@ plt.tight_layout()
 plt.savefig('/Users/apple/reg-ana/linechart.png', dpi=150)
 plt.close()
 print("Saved: linechart.png\n")
+
+# ── 4. Train / Test Split (80 / 20) ──────────────────────────────────────────
+X = df[FEATURES]
+y = df[TARGET]
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+print(f"Train size: {len(X_train):,}  |  Test size: {len(X_test):,}\n")
+
+# ── 5. Build & Train Models ───────────────────────────────────────────────────
+models = {
+    'Linear Regression': LinearRegression(),
+    'Decision Tree':     DecisionTreeRegressor(random_state=42),
+    'Random Forest':     RandomForestRegressor(n_estimators=100, random_state=42, n_jobs=-1),
+}
+
+for name, model in models.items():
+    model.fit(X_train, y_train)
+    print(f"Trained: {name}")
