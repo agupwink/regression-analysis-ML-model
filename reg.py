@@ -10,7 +10,7 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
 
-# 1. Load & Clean Data
+# 1. Load & Clean
 df = pd.read_csv('/Users/apple/Downloads/Summary of Weather.csv')
 
 df['Precip'] = df['Precip'].replace('T', 0)
